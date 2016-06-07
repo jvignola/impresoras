@@ -1,0 +1,32 @@
+<div class="row be-red white large-padding middle-xs">
+	<div class="col-xs center-xs">
+		<h1 class="no-margin" id="logo">Logo</h1>
+	</div>
+    <div class="col-xs center-xs">
+        <%= link_to "Inicio", root_path %>
+    </div>
+    <div class="col-xs center-xs">
+        Diseño
+    </div>
+    <div class="col-xs center-xs">
+        Programación
+    </div>
+    <div class="col-xs center-xs">
+        Tecnología
+    </div>
+    <% if user_signed_in? %>
+    	<div class="col-xs center-xs">
+    		<%= current_user.email %>
+    	</div>
+    	<div class="col-xs center-xs">
+    		<%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %>
+    	</div>
+    <% else %>
+    	<div class="col-xs center-xs">
+    		<%= link_to "Iniciar Sesión", new_user_session_path %>
+    	</div>
+    	<div class="col-xs center-xs">
+    		<%= link_to "Crear Cuenta", new_user_registration_path %>
+    	</div>
+    <% end %>
+</div>

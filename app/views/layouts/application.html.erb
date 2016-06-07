@@ -5,10 +5,16 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<%= render 'partials/navigation' %>
+<% unless notice.nil? %>
+	<p class="notice"><%= notice %></p>
+<% end %>
+<% unless alert.nil? %>
+	<p class="alert"><%= alert %></p>
+<% end %>
 
 <%= yield %>
 

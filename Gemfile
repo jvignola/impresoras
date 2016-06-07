@@ -2,6 +2,13 @@ source 'https://rubygems.org'
 
 # instalo devise
 gem 'devise'
+# corrige error
+gem 'coffee-script-source', '1.8.0'
+# instalo simple_form
+gem 'simple_form'
+# instalo paperclip
+gem 'paperclip'
+
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
