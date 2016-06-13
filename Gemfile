@@ -7,8 +7,9 @@ gem 'coffee-script-source', '1.8.0'
 # instalo simple_form
 gem 'simple_form'
 # instalo paperclip
-gem 'paperclip'
-
+gem "paperclip", "~> 4.3.6"
+# instalo will paginate
+gem 'will_paginate'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

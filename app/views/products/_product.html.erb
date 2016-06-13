@@ -1,0 +1,20 @@
+<div class="contenedor">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><%= product.name %></h3>
+	  </div>
+	  <div class="panel-body">
+	  <div class="row">
+		  <div class="col-xs-2"><span class="thumbnail"><%= image_tag product.image.url(:thumb) %></span></div>
+		  <div class="col-xs-7"><%= product.description %></div>
+		  <div class="col-xs-3">
+		  	<span class="badge">$ <%= product.price %></span>
+		  	<% if current_user.is_admin_user? %>
+		      <%= link_to 'Editar', edit_product_path(product), :class => "btn btn-default" %>
+		      <%= link_to 'Borrar', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %>
+		    <% end %>
+		  </div>
+	  </div>
+	  </div>
+	</div>
+</div>
