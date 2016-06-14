@@ -10,7 +10,10 @@
 <body>
 <%= render 'partials/navigation' %>
 <% unless notice.nil? %>
-	<p class="notice"><%= notice %></p>
+	<div class="alert alert-warning fade in">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+    	<%= notice %>
+    </div>
 <% end %>
 <% unless alert.nil? %>
 	<p class="alert"><%= alert %></p>

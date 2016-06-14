@@ -1,0 +1,14 @@
+<%= simple_form_for(@interaction) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.association :product %>
+    <%= f.input :pregunta %>
+    <%= f.input :mensaje %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

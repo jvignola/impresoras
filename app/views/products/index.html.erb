@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Productos</h1>
-<% if current_user.is_admin_user? %>
+<% if user_signed_in? && current_user.is_admin_user? %>
   <%= link_to 'Nuevo Producto', new_product_path %>
 <% end %>
 

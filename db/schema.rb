@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607181134) do
+ActiveRecord::Schema.define(version: 20160614145310) do
+
+  create_table "interactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.boolean  "pregunta"
+    t.text     "mensaje"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "interactions", ["product_id"], name: "index_interactions_on_product_id"
+  add_index "interactions", ["user_id"], name: "index_interactions_on_user_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.boolean  "autorizado"
+    t.boolean  "entregado"
+    t.integer  "cantidad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "orders", ["product_id"], name: "index_orders_on_product_id"
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "name"

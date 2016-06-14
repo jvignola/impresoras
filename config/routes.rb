@@ -1,11 +1,25 @@
 Rails.application.routes.draw do
+  
   resources :products
+  resources :interactions
+
+
+
+  get 'orders/sin_autorizar' => 'orders#ordenes_sin_autorizar', as: :ordenes_sin_autorizar
+  get 'orders/sin_entregar' => 'orders#ordenes_autorizadas_sin_entregar', as: :ordenes_sin_entregar
+  get 'orders/entregadas' => 'orders#ordenes_entregadas', as: :ordenes_entregadas
+  
+  resources :orders
+  
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'products#index'
+
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
