@@ -15,9 +15,12 @@
     	<%= notice %>
     </div>
 <% end %>
-<% unless alert.nil? %>
-	<p class="alert"><%= alert %></p>
-<% end %>
+
+<% if FALSE %>
+  <% unless alert.nil? %>
+  	<p class="alert"><%= alert %></p>
+  <% end %>
+<% end %> 
 
 <%= yield %>
 

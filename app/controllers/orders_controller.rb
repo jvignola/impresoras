@@ -42,8 +42,8 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.user = current_user
-    @product = Product.find(params[:product_id])
-    @order.product = @product
+    #@product = Product.find(params[:product_id])
+    #@order.product = @product
     @order.autorizado = current_user.is_authorized_user?
     @order.entregado = false
 
@@ -90,6 +90,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:cantidad)
+      params.require(:order).permit(:cantidad, :product_id)
     end
 end
