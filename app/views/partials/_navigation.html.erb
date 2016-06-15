@@ -19,15 +19,30 @@
 			  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <% if user_signed_in? && current_user.is_authorized_user? %>
-                    <li><%= link_to "Pedidos a Autorizar por mi", mis_ordenes_para_autorizar_path(:user_id => current_user.id) %></li>
+                    <li><%= link_to "Pedidos a Autorizar por mi", mis_ordenes_para_autorizar_path() %></li>
                 <% end %>
 			    <li><%= link_to "Sin Autorizar", ordenes_sin_autorizar_path %></li>
-			    <li><%= link_to "Autorizado sin entregar", ordenes_sin_entregar_path %></li>
+			    <li><%= link_to "Autorizado sin entregar", ordenes_mias_sin_entregar_path %></li>
+			    <li><%= link_to "Entregado", ordenes_mias_entregadas_path %></li>
+			  </ul>
+			</div>
+    	</div>
+	<% end %>
+	<% if user_signed_in? && current_user.is_admin_user? %>
+    	<div class="col-xs center-xs">
+        	<div class="dropdown">
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    Pedidos
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			    <li><%= link_to "Sin entregar", ordenes_sin_entregar_path %></li>
 			    <li><%= link_to "Entregado", ordenes_entregadas_path %></li>
 			  </ul>
 			</div>
     	</div>
 	<% end %>
+
     <div class="col-xs center-xs">
         Diseño
     </div>

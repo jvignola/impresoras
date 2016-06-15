@@ -1,6 +1,24 @@
 class OrdersController < ApplicationController
 
+  require 'will_paginate/array'
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin_user!, only: [:index]
+
+  def entregar_orden
+    @order = Order.find(params[:order_id])
+    @order.entregar
+    respond_to do |format|
+      format.html { redirect_to ordenes_sin_entregar_path, notice: 'El pedido fue entregado' }
+    end
+  end 
+
+  def autorizar_orden
+    @order = Order.find(params[:order_id])
+    @order.autorizar
+    respond_to do |format|
+      format.html { redirect_to mis_ordenes_para_autorizar_path, notice: 'El pedido fue autorizado' }
+    end
+  end 
 
   def ordenes_a_autorizar_x_mi
     @ordenes_sin_autorizar = Order.sin_autorizar
@@ -21,14 +39,26 @@ class OrdersController < ApplicationController
     render 'index'
   end
 
-  def ordenes_autorizadas_sin_entregar
+  def ordenes_mias_autorizadas_sin_entregar
     @orders = Order.mias(current_user.id).sin_entregar.paginate(page: params[:page], per_page:2)
     @estado = "Autorizados"
     render 'index'
   end
 
-  def ordenes_entregadas
+  def ordenes_mias_entregadas
     @orders = Order.mias(current_user.id).entregadas.paginate(page: params[:page], per_page:2)
+    @estado = "Entregados"
+    render 'index'
+  end
+
+  def ordenes_autorizadas_sin_entregar
+    @orders = Order.sin_entregar.paginate(page: params[:page], per_page:2)
+    @estado = "Autorizados"
+    render 'index'
+  end
+
+  def ordenes_entregadas
+    @orders = Order.entregadas.paginate(page: params[:page], per_page:2)
     @estado = "Entregados"
     render 'index'
   end

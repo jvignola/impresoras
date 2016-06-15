@@ -17,6 +17,12 @@
 		      <%= link_to 'Editar', edit_order_path(order), :class => "btn btn-default" %>
 		      <%= link_to 'Eliminar', order, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %>
 		    <% end %>
+		    <% if @estado == "para autorizar por mi"%>
+		    	<%= link_to 'Autorizar', authorize_order_path(:order_id => order.id), :class => "btn btn-default", method: :post %>
+		    <% end %>
+		    <% if user_signed_in? && current_user.is_admin_user? %>
+                <%= link_to 'Entregado', deliver_order_path(:order_id => order.id), :class => "btn btn-default", method: :post %>
+            <% end %>
 		  </div>
 	  </div>
 	  </div>

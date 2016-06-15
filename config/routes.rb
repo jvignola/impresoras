@@ -3,10 +3,14 @@ Rails.application.routes.draw do
   resources :products
   resources :interactions
 
+  post 'orders/entregar' => 'orders#entregar_orden',   as: :deliver_order
+  post 'orders/autorizar' => 'orders#autorizar_orden',   as: :authorize_order
   get 'orders/sin_autorizar' => 'orders#ordenes_sin_autorizar', as: :ordenes_sin_autorizar
+  get 'orders/mias_sin_entregar' => 'orders#ordenes_mias_autorizadas_sin_entregar', as: :ordenes_mias_sin_entregar
+  get 'orders/mias_entregadas' => 'orders#ordenes_mias_entregadas', as: :ordenes_mias_entregadas
+  get 'orders/a_autorizar_x_mi' => 'orders#ordenes_a_autorizar_x_mi', as: :mis_ordenes_para_autorizar
   get 'orders/sin_entregar' => 'orders#ordenes_autorizadas_sin_entregar', as: :ordenes_sin_entregar
   get 'orders/entregadas' => 'orders#ordenes_entregadas', as: :ordenes_entregadas
-  get 'orders/a_autorizar_x_mi' => 'orders#ordenes_a_autorizar_x_mi', as: :mis_ordenes_para_autorizar
   
   resources :orders
   
