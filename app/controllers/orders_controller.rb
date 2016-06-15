@@ -1,9 +1,17 @@
 class OrdersController < ApplicationController
+
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def ordenes_a_autorizar_x_mi
-    @orders = Order.mias(current_user.id).sin_autorizar.paginate(page: params[:page], per_page:2)
+    @ordenes_sin_autorizar = Order.sin_autorizar
+    @orders = []
+    @ordenes_sin_autorizar.each do |orden_sin_autorizar|
+      if orden_sin_autorizar.user.user == current_user
+        @orders.push(orden_sin_autorizar)
+      end
+    end
     @estado = "para autorizar por mi"
+    @orders = @orders.paginate(page: params[:page], per_page:2)
     render 'index'
   end
 

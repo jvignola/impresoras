@@ -19,7 +19,7 @@
 			  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <% if user_signed_in? && current_user.is_authorized_user? %>
-                    <li><%= link_to "Ordenes a Autorizar por mi", mis_ordenes_para_autorizar_path(current_user) %></li>
+                    <li><%= link_to "Pedidos a Autorizar por mi", mis_ordenes_para_autorizar_path(:user_id => current_user.id) %></li>
                 <% end %>
 			    <li><%= link_to "Sin Autorizar", ordenes_sin_autorizar_path %></li>
 			    <li><%= link_to "Autorizado sin entregar", ordenes_sin_entregar_path %></li>
