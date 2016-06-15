@@ -1,25 +1,34 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+  def ordenes_a_autorizar_x_mi
+    @orders = Order.mias(current_user.id).sin_autorizar.paginate(page: params[:page], per_page:2)
+    @estado = "para autorizar por mi"
+    render 'index'
+  end
+
   def ordenes_sin_autorizar
-    @orders = Order.sin_autorizar
+    @orders = Order.mias(current_user.id).sin_autorizar.paginate(page: params[:page], per_page:2)
+    @estado = "sin Autorizar"
     render 'index'
   end
 
   def ordenes_autorizadas_sin_entregar
-    @orders = Order.sin_entregar
+    @orders = Order.mias(current_user.id).sin_entregar.paginate(page: params[:page], per_page:2)
+    @estado = "Autorizados"
     render 'index'
   end
 
   def ordenes_entregadas
-    @orders = Order.entregadas
+    @orders = Order.mias(current_user.id).entregadas.paginate(page: params[:page], per_page:2)
+    @estado = "Entregados"
     render 'index'
   end
 
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.all.paginate(page: params[:page], per_page:2)
   end
 
   # GET /orders/1

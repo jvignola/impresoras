@@ -12,7 +12,7 @@
 		  	<% if user_signed_in? && current_user.is_admin_user? %>
 		      <%= link_to 'Editar', edit_product_path(product), :class => "btn btn-default" %>
 		      <%= link_to 'Borrar', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %>
-		    <% elsif user_signed_in? && (current_user.is_normal_user? || current_user.is_authorized_user?) %>
+		    <% elsif user_signed_in? && (current_user.is_authorized_user? || current_user.is_normal_user?) %>
 		    	<%= simple_form_for (@order) do |f| %>
   				<%= f.error_notification %>
 				<div class="form-inputs">

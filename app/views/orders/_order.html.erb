@@ -1,0 +1,24 @@
+<div class="contenedor">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title"><%= order.user.email %> solicitó <%= order.cantidad %> unidades de <%= link_to order.product.name, order.product %></h3>
+	  </div>
+	  <div class="panel-body">
+	  <div class="row">
+		  <div class="col-xs-2"><span class="thumbnail"><%= image_tag order.product.image.url(:thumb) %></span></div>
+		  <div class="col-xs-7"><%= order.product.description %>
+		  	<% unless order.user.user.nil? %>
+		  		<br> Este pedido debe ser autorizado por <%= order.user.user.email %>
+		  	<% end %>
+		  </div>
+		  <div class="col-xs-3">
+		  	<span class="badge">$ <%= order.cantidad * order.product.price %></span>
+		  	<% unless order.autorizado %>
+		      <%= link_to 'Editar', edit_order_path(order), :class => "btn btn-default" %>
+		      <%= link_to 'Eliminar', order, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %>
+		    <% end %>
+		  </div>
+	  </div>
+	  </div>
+	</div>
+</div>

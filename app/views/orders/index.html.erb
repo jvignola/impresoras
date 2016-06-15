@@ -1,35 +1,7 @@
-<p id="notice"><%= notice %></p>
+<h1>Pedidos <%= @estado %></h1>
 
-<h1>Listing Orders</h1>
+<%= render @orders %>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Product</th>
-      <th>Autorizado</th>
-      <th>Entregado</th>
-      <th>Cantidad</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.user %></td>
-        <td><%= order.product %></td>
-        <td><%= order.autorizado %></td>
-        <td><%= order.entregado %></td>
-        <td><%= order.cantidad %></td>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Order', new_order_path %>
+<div class="contenedor">
+  <%= will_paginate @orders, :previous_label => 'Anterior', :next_label => 'Siguiente', :class => 'apple_pagination' %>
+</div>

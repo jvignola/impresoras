@@ -1,11 +1,7 @@
 <h1>Productos</h1>
-<% if user_signed_in? && current_user.is_admin_user? %>
-  <%= link_to 'Nuevo Producto', new_product_path %>
-<% end %>
-
-<br>
 
 <%= render @products %>
+
 <div class="contenedor">
   <%= will_paginate @products, :previous_label => 'Anterior', :next_label => 'Siguiente', :class => 'apple_pagination' %>
 </div>
