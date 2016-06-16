@@ -1,6 +1,19 @@
 class InteractionsController < ApplicationController
   before_action :set_interaction, only: [:show, :edit, :update, :destroy]
 
+  def respondidas
+    @interactions = Interaction.respondidas.paginate(page: params[:page], per_page:2)
+    @estado = "Respondidas"
+    render 'index'
+  end
+
+  def sin_responder
+    @interactions = Interaction.sin_responder.paginate(page: params[:page], per_page:2)
+    @interaction = Interaction.new
+    @estado = "sin Responder"
+    render 'index'
+  end
+
   # GET /interactions
   # GET /interactions.json
   def index
@@ -25,10 +38,21 @@ class InteractionsController < ApplicationController
   # POST /interactions.json
   def create
     @interaction = Interaction.new(interaction_params)
+    @interaction. user = current_user
+
+    # TODO: luego de crear las preguntas o respuestas enviar mails a los involucrados
 
     respond_to do |format|
       if @interaction.save
-        format.html { redirect_to @interaction, notice: 'Interaction was successfully created.' }
+        if @interaction.pregunta
+          format.html { redirect_to @interaction.product, notice: 'Tu pregunta fue enviada.' }
+        else
+          @pregunta = Interaction.find(params[:interaction][:pregunta_id])
+          @pregunta.interaction = @interaction
+          @pregunta.respondida = true
+          @pregunta.save
+          format.html { redirect_to preguntas_sin_responder_path, notice: 'Tu respuesta fue enviada.' }
+        end
         format.json { render :show, status: :created, location: @interaction }
       else
         format.html { render :new }

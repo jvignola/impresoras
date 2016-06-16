@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all.paginate(page: params[:page], per_page:2)
+    @listado = true
     @order = Order.new
   end
 
@@ -13,6 +14,9 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @order = Order.new
+    @interaction = Interaction.new
+    @listado = false
+    @lista_interacciones = Interaction.where(product: @product)
   end
 
   # GET /products/new

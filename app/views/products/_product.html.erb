@@ -6,7 +6,26 @@
 	  <div class="panel-body">
 	  <div class="row">
 		  <div class="col-xs-2"><span class="thumbnail"><%= image_tag product.image.url(:thumb) %></span></div>
-		  <div class="col-xs-7"><%= product.description %></div>
+		  <div class="col-xs-7">
+		  	<p><%= product.description %></p> 
+		  	<% if @listado && user_signed_in? && (current_user.is_authorized_user? || current_user.is_normal_user?) %>
+		  		<p><%= link_to 'Hacer Consulta', product %></p> 
+		  	<% end %>
+            <% if @listado==false && user_signed_in? && (current_user.is_authorized_user? || current_user.is_normal_user?) %>
+            	<%= simple_form_for (@interaction) do |f| %>
+  				<%= f.error_notification %>
+				<div class="form-inputs">
+				  <%= f.input :mensaje, label: 'Pregunta' %>
+				  <%= f.input :product_id, :as => :hidden, :input_html => { :value => "#{product.id}" } %>
+				  <%= f.input :pregunta, :as => :hidden, :input_html => { :value => "true" } %>
+				  <%= f.input :respondida, :as => :hidden, :input_html => { :value => "false" } %>
+				</div>
+				<div class="form-actions">
+				  <%= f.button :submit, 'Preguntar' %>
+				</div>
+				<% end %>
+            <% end %>
+		  </div>
 		  <div class="col-xs-3">
 		  	<span class="badge">$ <%= product.price %></span>
 		  	<% if user_signed_in? && current_user.is_admin_user? %>
@@ -28,4 +47,8 @@
 	  </div>
 	  </div>
 	</div>
+	<% if @listado==false && @lista_interacciones.size > 0 %>
+		<h1>Preguntas y Respuestas</h1>
+		<%= render @lista_interacciones %>
+	<% end %>
 </div>

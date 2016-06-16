@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   
   resources :products
+
+
+  get 'interactions/respondidas' => 'interactions#respondidas',as: :preguntas_respondidas
+  get 'interactions/sin_responder' => 'interactions#sin_responder',as: :preguntas_sin_responder
+
   resources :interactions
 
   post 'orders/entregar' => 'orders#entregar_orden',   as: :deliver_order

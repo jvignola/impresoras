@@ -41,17 +41,21 @@
 			  </ul>
 			</div>
     	</div>
+
+    	<div class="col-xs center-xs">
+        	<div class="dropdown">
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    Preguntas
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+			    <li><%= link_to "Sin Responder", preguntas_sin_responder_path %></li>
+			    <li><%= link_to "Respondidas", preguntas_respondidas_path %></li>
+			  </ul>
+			</div>
+    	</div>
 	<% end %>
 
-    <div class="col-xs center-xs">
-        Diseño
-    </div>
-    <div class="col-xs center-xs">
-        Programación
-    </div>
-    <div class="col-xs center-xs">
-        Tecnología
-    </div>
     <% if user_signed_in? %>
     	<div class="col-xs center-xs">
     		<%= current_user.email %>
