@@ -2,7 +2,5 @@
 
 <%= render @products %>
 
-<div class="contenedor">
-  <%= will_paginate @products, :previous_label => 'Anterior', :next_label => 'Siguiente', :class => 'apple_pagination' %>
-</div>
+<%= will_paginate @products, :previous_label => 'Anterior', :next_label => 'Siguiente', :class => 'apple_pagination' %>
 

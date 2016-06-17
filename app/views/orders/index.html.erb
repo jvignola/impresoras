@@ -1,7 +1,5 @@
-<div class="contenedor">
-  <h1>Pedidos <%= @estado %></h1>
+<h1>Pedidos <%= @estado %></h1>
 
-  <%= render @orders %>
+<%= render @orders %>
 
-  <%= will_paginate @orders, :previous_label => 'Anterior', :next_label => 'Siguiente', :class => 'apple_pagination' %>
-</div>
+<%= will_paginate @orders, :previous_label => 'Anterior', :next_label => 'Siguiente', :class => 'apple_pagination' %>
