@@ -1,7 +1,7 @@
-<h1>Preguntas <%= @estado %></h1>
-
-<%= render @interactions %>
-
 <div class="contenedor">
+  <h1>Preguntas <%= @estado %></h1>
+
+  <%= render @interactions %>
+
   <%= will_paginate @orders, :previous_label => 'Anterior', :next_label => 'Siguiente', :class => 'apple_pagination' %>
 </div>

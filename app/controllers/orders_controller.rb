@@ -39,6 +39,12 @@ class OrdersController < ApplicationController
     render 'index'
   end
 
+  def ordenes_sin_autorizar_todas
+    @orders = Order.sin_autorizar.paginate(page: params[:page], per_page:2)
+    @estado = "sin Autorizar"
+    render 'index'
+  end
+
   def ordenes_mias_autorizadas_sin_entregar
     @orders = Order.mias(current_user.id).sin_entregar.paginate(page: params[:page], per_page:2)
     @estado = "Autorizados"
