@@ -21,12 +21,26 @@
                 <% if user_signed_in? && current_user.is_authorized_user? %>
                     <li><%= link_to "Pedidos a Autorizar por mi", mis_ordenes_para_autorizar_path() %></li>
                 <% end %>
-			    <li><%= link_to "Sin Autorizar", ordenes_sin_autorizar_path %></li>
-			    <li><%= link_to "Autorizado sin entregar", ordenes_mias_sin_entregar_path %></li>
-			    <li><%= link_to "Entregado", ordenes_mias_entregadas_path %></li>
+			    <li><%= link_to "Mios Sin Autorizar", ordenes_sin_autorizar_path %></li>
+			    <li><%= link_to "Mios Autorizados sin entregar", ordenes_mias_sin_entregar_path %></li>
+			    <li><%= link_to "Mios Entregados", ordenes_mias_entregadas_path %></li>
 			  </ul>
 			</div>
     	</div>
+
+        <div class="col-xs center-xs">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Mis Preguntas
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li><%= link_to "Sin Responder", preguntas_mias_sin_responder_path %></li>
+                <li><%= link_to "Respondidas", preguntas_mias_respondidas_path %></li>
+              </ul>
+            </div>
+        </div>
+
 	<% end %>
 	<% if user_signed_in? && current_user.is_admin_user? %>
     	<div class="col-xs center-xs">

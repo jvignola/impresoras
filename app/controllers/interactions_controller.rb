@@ -1,5 +1,8 @@
 class InteractionsController < ApplicationController
   before_action :set_interaction, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin_user!, only: [:respondidas, :sin_responder, :index, :show, :edit, :update, :destroy]
+  before_action :authenticate_authorized_user!, only: []
+  before_action :authenticate_any_user!, only: [:new, :create, :mis_respondidas, :mis_sin_responder]
 
   def respondidas
     @interactions = Interaction.respondidas.paginate(page: params[:page], per_page:2)
@@ -9,6 +12,19 @@ class InteractionsController < ApplicationController
 
   def sin_responder
     @interactions = Interaction.sin_responder.paginate(page: params[:page], per_page:2)
+    @interaction = Interaction.new
+    @estado = "sin Responder"
+    render 'index'
+  end
+
+  def mis_respondidas
+    @interactions = Interaction.mias(current_user.id).respondidas.paginate(page: params[:page], per_page:2)
+    @estado = "Respondidas"
+    render 'index'
+  end
+
+  def mis_sin_responder
+    @interactions = Interaction.mias(current_user.id).sin_responder.paginate(page: params[:page], per_page:2)
     @interaction = Interaction.new
     @estado = "sin Responder"
     render 'index'

@@ -7,7 +7,7 @@
 				</div>
 				<div class="panel-body">
 					<%= interaction.mensaje %>
-					<% if interaction.pregunta && interaction.respondida==false %>
+					<% if interaction.pregunta && interaction.respondida==false && user_signed_in? && current_user.is_admin_user? %>
 						<%= simple_form_for (@interaction) do |f| %>
 		  				<%= f.error_notification %>
 						<div class="form-inputs">
