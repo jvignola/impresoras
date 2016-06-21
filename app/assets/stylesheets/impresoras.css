@@ -24,6 +24,7 @@ a, a:visited{
 .contenedor{
 	width: 90%;
 	margin: 0 auto;
+  margin-top: 1em;
 }
 
 .apple_pagination {

@@ -2,7 +2,10 @@ class OrdersController < ApplicationController
 
   require 'will_paginate/array'
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin_user!, only: [:index]
+  before_action :authenticate_admin_user!, only: [:show, :index, :entregar_orden, :ordenes_sin_autorizar_todas, :ordenes_autorizadas_sin_entregar, :ordenes_entregadas]
+  before_action :authenticate_authorized_user!, only: [:autorizar_orden, :ordenes_a_autorizar_x_mi]
+  before_action :authenticate_any_user!, only: [:ordenes_sin_autorizar, :ordenes_mias_autorizadas_sin_entregar, :ordenes_mias_entregadas, :new, :create, :edit, :update, :destroy]
+  
 
   def entregar_orden
     @order = Order.find(params[:order_id])
@@ -114,13 +117,19 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :ok, location: @order }
-      else
-        format.html { render :edit }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    if @order.user == current_user || current_user.is_admin_user?
+      respond_to do |format|
+        if @order.update(order_params)
+          format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+          format.json { render :show, status: :ok, location: @order }
+        else
+          format.html { render :edit }
+          format.json { render json: @order.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+          format.html { redirect_to products_path, notice: 'No tienes los suficientes privilegios para editar el pedido' }
       end
     end
   end
@@ -128,10 +137,16 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
-    @order.destroy
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-      format.json { head :no_content }
+    if @order.user == current_user || current_user.is_admin_user?
+      @order.destroy
+      respond_to do |format|
+        format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to orders_url, notice: 'No tienes los suficientes privilegios para eliminar el pedido' }
+      end
     end
   end
 
