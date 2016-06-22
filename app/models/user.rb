@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   belongs_to :user
   include PermissionsConcern
+  scope :administradores, -> { where(permission_level: 300) }
 end

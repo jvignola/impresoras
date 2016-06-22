@@ -18,6 +18,7 @@ class OrdersController < ApplicationController
   def autorizar_orden
     @order = Order.find(params[:order_id])
     @order.autorizar
+    OrdersMailer.nuevo_pedido_autorizado(@order).deliver_later
     respond_to do |format|
       format.html { redirect_to mis_ordenes_para_autorizar_path, notice: 'El pedido fue autorizado' }
     end
@@ -105,6 +106,11 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        if @order.autorizado
+          OrdersMailer.nuevo_pedido_autorizado(@order).deliver_later
+        else
+          OrdersMailer.pedido_para_autorizar(@order).deliver_later
+        end 
         format.html { redirect_to products_path, notice: 'El pedido fue realizado' }
         format.json { render :show, status: :created, location: @order }
       else

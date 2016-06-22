@@ -1,0 +1,7 @@
+<p>El usuario <%= @pregunta.user.name %> realizó una nueva pregunta sobre el producto <%= @pregunta.product.name %>:</p>
+<p>
+La pregunta es: <%= @pregunta.mensaje %>
+</p>
+<p>
+Para responder la pregunta ingrese <%= link_to 'aqui', preguntas_sin_responder_url %>
+</p>

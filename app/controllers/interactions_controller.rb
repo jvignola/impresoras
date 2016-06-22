@@ -61,12 +61,14 @@ class InteractionsController < ApplicationController
     respond_to do |format|
       if @interaction.save
         if @interaction.pregunta
+          OrdersMailer.nueva_pregunta(@interaction).deliver_later
           format.html { redirect_to @interaction.product, notice: 'Tu pregunta fue enviada.' }
         else
           @pregunta = Interaction.find(params[:interaction][:pregunta_id])
           @pregunta.interaction = @interaction
           @pregunta.respondida = true
           @pregunta.save
+          OrdersMailer.nueva_respuesta(@pregunta).deliver_later
           format.html { redirect_to preguntas_sin_responder_path, notice: 'Tu respuesta fue enviada.' }
         end
         format.json { render :show, status: :created, location: @interaction }

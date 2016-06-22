@@ -1,0 +1,7 @@
+<p>El usuario <%= @pregunta.interaction.user.name %> respondió su pregunta sobre el producto <%= @pregunta.product.name %>:</p>
+<p>La pregunta fue: <%= @pregunta.mensaje %></p>
+<p>La respuesta es: <%= @pregunta.interaction.mensaje %></p>
+
+<p>
+Para hacer más preguntas sobre el producto ingrese <%= link_to 'aqui', @pregunta.product %>
+</p>

@@ -1,0 +1,10 @@
+<p>El usuario <%= @pedido.user.name %> ingresó un nuevo pedido que ya fue autorizado, los datos del mismo son:</p>
+<p>
+Producto: <%= @pedido.product.name %><br>
+Cantidad: <%= @pedido.cantidad %><br>
+Precio Unitario: <%= @pedido.product.price %><br>
+Precio Total: <%= @pedido.cantidad * @pedido.product.price %><br>
+</p>
+<p>
+Dicho pedido debe ser enviado, para hacerlo ingrese <%= link_to 'aqui', ordenes_sin_entregar_url %>
+</p>
