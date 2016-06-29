@@ -1,4 +1,15 @@
 Rails.application.configure do
+  #para paperclip con amazon web services s3
+  config.paperclip_defaults = {
+  storage: :s3,
+  s3_credentials: {
+    bucket: ENV.fetch('impresorasgerman'),
+    access_key_id: ENV.fetch('AKIAI4GJIUQZMNQGNR2A'),
+    secret_access_key: ENV.fetch('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'),
+    s3_region: ENV.fetch('US'),
+  }
+}
+
     # Para mailing
   config.action_mailer.default_url_options = {host: 'midominio.com'}
   config.action_mailer.delivery_method = :letter_opener

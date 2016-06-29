@@ -10,6 +10,8 @@ gem 'simple_form'
 gem "paperclip", "~> 4.3.6"
 # instalo will paginate
 gem 'will_paginate'
+# instalo gema de amazon web services para usar s3
+gem 'aws-sdk', '~> 2.3' 
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
