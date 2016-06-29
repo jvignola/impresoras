@@ -6,7 +6,7 @@ Rails.application.configure do
     bucket: ENV.fetch('impresorasgerman'),
     access_key_id: ENV.fetch('AKIAI4GJIUQZMNQGNR2A'),
     secret_access_key: ENV.fetch('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'),
-    s3_region: ENV.fetch('US'),
+    s3_region: ENV.fetch('us'),
   }
 }
 
