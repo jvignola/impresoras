@@ -3,11 +3,13 @@
 		<h1 class="no-margin" id="logo"><%= link_to "Logo", root_path %></h1>
 	</div>
     <div class="col-xs center-xs">
-        <%= form_tag products_search_path, :method => 'get' do %>
-          <p>
-            <%= text_field_tag :search, params[:search] %>
-            <%= submit_tag "Search", :name => nil %>
-          </p>
+        <%= form_tag products_search_path, :method => 'get', :class => "navbar-form", :role => "search" do %>
+            <div class="input-group">
+                <%= text_field_tag :search, params[:search], :class => 'form-control' %>
+                <div class="input-group-btn">
+                    <%= submit_tag "<i class=\"glyphicon glyphicon-search\"></i>", :name => nil, :class => 'btn btn-default'  %>
+                </div>
+            </div>
         <% end %>
     </div>
     <% if user_signed_in? && current_user.is_admin_user? %>

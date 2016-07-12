@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
     @products = Product.search(params[:search]).paginate(page: params[:page], per_page:10)
     @listado = true
     @order = Order.new
+    render 'index'
   end
 
   # GET /products
