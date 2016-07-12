@@ -2,6 +2,14 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin_user!, except: [:index, :show]
 
+
+  # GET /search
+  def search 
+    @products = Product.search(params[:search]).paginate(page: params[:page], per_page:10)
+    @listado = true
+    @order = Order.new
+  end
+
   # GET /products
   # GET /products.json
   def index

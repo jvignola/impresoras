@@ -9,4 +9,12 @@ class Product < ActiveRecord::Base
     has_many :orders
     has_many :interactions
 
+	def self.search(search)
+	  if search
+	    find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+	  else
+	    find(:all)
+	  end
+	end
+
 end
