@@ -108,6 +108,7 @@ class OrdersController < ApplicationController
       if @order.save
         if @order.autorizado
           OrdersMailer.nuevo_pedido_autorizado(@order).deliver_later
+          puts "prueba log"
         else
           OrdersMailer.pedido_para_autorizar(@order).deliver_later
         end 

@@ -1,6 +1,8 @@
 Rails.application.configure do
-    # Para mailing
+
+  # Para mailing
   config.action_mailer.default_url_options = {host: 'midominio.com'}
+  config.action_mailer.delivery_method = :letter_opener
 
   # Settings specified here will take precedence over those in config/application.rb.
 
