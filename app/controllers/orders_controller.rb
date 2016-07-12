@@ -33,42 +33,42 @@ class OrdersController < ApplicationController
       end
     end
     @estado = "para autorizar por mi"
-    @orders = @orders.paginate(page: params[:page], per_page:2)
+    @orders = @orders.paginate(page: params[:page], per_page:10)
     render 'index'
   end
 
   def ordenes_sin_autorizar
-    @orders = Order.mias(current_user.id).sin_autorizar.paginate(page: params[:page], per_page:2)
+    @orders = Order.mias(current_user.id).sin_autorizar.paginate(page: params[:page], per_page:10)
     @estado = "sin Autorizar"
     render 'index'
   end
 
   def ordenes_sin_autorizar_todas
-    @orders = Order.sin_autorizar.paginate(page: params[:page], per_page:2)
+    @orders = Order.sin_autorizar.paginate(page: params[:page], per_page:10)
     @estado = "sin Autorizar"
     render 'index'
   end
 
   def ordenes_mias_autorizadas_sin_entregar
-    @orders = Order.mias(current_user.id).sin_entregar.paginate(page: params[:page], per_page:2)
+    @orders = Order.mias(current_user.id).sin_entregar.paginate(page: params[:page], per_page:10)
     @estado = "Autorizados"
     render 'index'
   end
 
   def ordenes_mias_entregadas
-    @orders = Order.mias(current_user.id).entregadas.paginate(page: params[:page], per_page:2)
+    @orders = Order.mias(current_user.id).entregadas.paginate(page: params[:page], per_page:10)
     @estado = "Entregados"
     render 'index'
   end
 
   def ordenes_autorizadas_sin_entregar
-    @orders = Order.sin_entregar.paginate(page: params[:page], per_page:2)
+    @orders = Order.sin_entregar.paginate(page: params[:page], per_page:10)
     @estado = "Autorizados"
     render 'index'
   end
 
   def ordenes_entregadas
-    @orders = Order.entregadas.paginate(page: params[:page], per_page:2)
+    @orders = Order.entregadas.paginate(page: params[:page], per_page:10)
     @estado = "Entregados"
     render 'index'
   end
@@ -76,7 +76,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all.paginate(page: params[:page], per_page:2)
+    @orders = Order.all.paginate(page: params[:page], per_page:10)
   end
 
   # GET /orders/1

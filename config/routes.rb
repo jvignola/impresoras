@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   
-  resources :products
+  get 'products/search' => 'products#search',as: :products_search
 
+  resources :products
 
   get 'interactions/respondidas' => 'interactions#respondidas',as: :preguntas_respondidas
   get 'interactions/sin_responder' => 'interactions#sin_responder',as: :preguntas_sin_responder

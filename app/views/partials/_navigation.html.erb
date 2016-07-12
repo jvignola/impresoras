@@ -1,9 +1,14 @@
 <div class="row be-red white large-padding middle-xs">
 	<div class="col-xs center-xs">
-		<h1 class="no-margin" id="logo">Logo</h1>
+		<h1 class="no-margin" id="logo"><%= link_to "Logo", root_path %></h1>
 	</div>
     <div class="col-xs center-xs">
-        <%= link_to "Inicio", root_path %>
+        <%= form_tag products_search_path, :method => 'get' do %>
+          <p>
+            <%= text_field_tag :search, params[:search] %>
+            <%= submit_tag "Search", :name => nil %>
+          </p>
+        <% end %>
     </div>
     <% if user_signed_in? && current_user.is_admin_user? %>
         <div class="col-xs center-xs">
