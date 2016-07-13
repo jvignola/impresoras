@@ -1,7 +1,22 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin_user!, except: [:index, :show]
+  before_action :authenticate_admin_user!, except: [:index, :show, :search]
 
+  def agotado
+    @product = Product.find(params[:product_id])
+    @product.marcar_agotado
+    respond_to do |format|
+      format.html { redirect_to products_path, notice: 'El producto quedó marcado como agotado' }
+    end
+  end
+
+  def en_stock
+    @product = Product.find(params[:product_id])
+    @product.marcar_en_stock
+    respond_to do |format|
+      format.html { redirect_to products_path, notice: 'El producto quedó marcado como en stock' }
+    end
+  end
 
   # GET /search
   def search 

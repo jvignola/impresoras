@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  
+  post 'products/agotado' => 'products#agotado', as: :producto_agotado
+  post 'products/en_stock' => 'products#en_stock', as: :hay_stock_producto
   get 'products/search' => 'products#search',as: :products_search
 
   resources :products
@@ -11,8 +14,8 @@ Rails.application.routes.draw do
 
   resources :interactions
 
-  post 'orders/entregar' => 'orders#entregar_orden',   as: :deliver_order
-  post 'orders/autorizar' => 'orders#autorizar_orden',   as: :authorize_order
+  post 'orders/entregar' => 'orders#entregar_orden', as: :deliver_order
+  post 'orders/autorizar' => 'orders#autorizar_orden', as: :authorize_order
   get 'orders/sin_autorizar_todas' => 'orders#ordenes_sin_autorizar_todas', as: :ordenes_sin_autorizar_todas
   get 'orders/sin_autorizar' => 'orders#ordenes_sin_autorizar', as: :ordenes_sin_autorizar
   get 'orders/mias_sin_entregar' => 'orders#ordenes_mias_autorizadas_sin_entregar', as: :ordenes_mias_sin_entregar

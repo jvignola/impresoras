@@ -1,0 +1,10 @@
+<p>Sr/a. <%= @pedido.user.name %>, usted ingresó un pedido que fue entregado, los datos del mismo son:</p>
+<p>
+Producto: <%= @pedido.product.name %><br>
+Cantidad: <%= @pedido.cantidad %><br>
+Precio Unitario: <%= @pedido.product.price %><br>
+Precio Total: <%= @pedido.cantidad * @pedido.product.price %><br>
+</p>
+<p>
+Ingrese a nuestra web haciendo clic <%= link_to 'aqui', root_url %>
+</p>

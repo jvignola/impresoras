@@ -18,4 +18,12 @@ class Product < ActiveRecord::Base
 	  end
 	end
 
+	def marcar_agotado
+		self.update(agotado:true)
+	end
+
+  	def marcar_en_stock
+  		self.update(agotado:false)
+  	end
+
 end

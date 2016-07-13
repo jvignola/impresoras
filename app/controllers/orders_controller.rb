@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
   def entregar_orden
     @order = Order.find(params[:order_id])
     @order.entregar
+    OrdersMailer.pedido_entregado(@order).deliver_later
     respond_to do |format|
       format.html { redirect_to ordenes_sin_entregar_path, notice: 'El pedido fue entregado' }
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616185228) do
+ActiveRecord::Schema.define(version: 20160713012029) do
 
   create_table "interactions", force: :cascade do |t|
     t.integer  "user_id"
@@ -45,12 +45,13 @@ ActiveRecord::Schema.define(version: 20160616185228) do
     t.string   "name"
     t.text     "description"
     t.integer  "price"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.boolean  "agotado",            default: false
   end
 
   create_table "users", force: :cascade do |t|
