@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713012029) do
+ActiveRecord::Schema.define(version: 20160713190131) do
 
   create_table "interactions", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,8 +34,11 @@ ActiveRecord::Schema.define(version: 20160713012029) do
     t.boolean  "autorizado"
     t.boolean  "entregado"
     t.integer  "cantidad"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.datetime "fecha_autorizado"
+    t.datetime "fecha_entregado"
+    t.string   "aclaracion"
   end
 
   add_index "orders", ["product_id"], name: "index_orders_on_product_id"

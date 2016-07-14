@@ -8,9 +8,9 @@ class Order < ActiveRecord::Base
   scope :entregadas, -> { where(entregado: true) }
 
   def autorizar
-  	self.update(autorizado: true)
+  	self.update(autorizado: true, fecha_autorizado: DateTime.now)
   end
   def entregar
-  	self.update(entregado: true)
+  	self.update(entregado: true, fecha_entregado: DateTime.now)
   end
 end

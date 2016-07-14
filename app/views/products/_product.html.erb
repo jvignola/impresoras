@@ -44,6 +44,7 @@
 				<%= f.error_notification %>
 			<div class="form-inputs">
 			  <%= f.input :cantidad %>
+			  <%= f.input :aclaracion %>
 			  <%= f.input :product_id, :as => :hidden, :input_html => { :value => "#{product.id}" } %>
 			</div>
 			<div class="form-actions">

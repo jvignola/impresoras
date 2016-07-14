@@ -109,7 +109,7 @@ class OrdersController < ApplicationController
       if @order.save
         if @order.autorizado
           OrdersMailer.nuevo_pedido_autorizado(@order).deliver_later
-          puts "prueba log"
+          @order.update(fecha_autorizado: DateTime.now)
         else
           OrdersMailer.pedido_para_autorizar(@order).deliver_later
         end 
@@ -166,6 +166,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:cantidad, :product_id)
+      params.require(:order).permit(:cantidad, :product_id, :aclaracion)
     end
 end

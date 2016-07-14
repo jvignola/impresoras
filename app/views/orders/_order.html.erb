@@ -5,10 +5,31 @@
   <div class="panel-body">
   <div class="row">
 	  <div class="col-xs-2"><span class="thumbnail"><%= image_tag order.product.image.url(:thumb) %></span></div>
-	  <div class="col-xs-7"><%= order.product.description %>
+	  <div class="col-xs-7"><p><%= order.product.description %></p>
 	  	<% unless order.user.user.nil? %>
-	  		<br> Este pedido debe ser autorizado por <%= order.user.user.email %>
+	  		    <p>Este pedido 
+	  		<% if order.autorizado %>
+	  			fue
+	  		<% else %>
+	  			debe ser
+	  		<% end %>
+	  		 	autorizado por <%= order.user.user.email %></p>
 	  	<% end %>
+	  	<% if order.aclaracion %>
+	  		<p><b>Aclaración: </b><%= order.aclaracion %></p>
+	  	<% end %>
+	  	<div class="fechas">
+	  		Pedido creado hace: <%= time_ago_in_words order.created_at %><br>
+	  		<% if order.fecha_autorizado %>
+	  			Pedido autorizado hace: <%= time_ago_in_words order.fecha_autorizado %> - Demora autorización:
+	  			<%= distance_of_time_in_words(order.created_at, order.fecha_autorizado) %><br>
+	  		<% end %>
+	  		<% if order.fecha_entregado %>
+	  			Pedido entregado hace: <%= time_ago_in_words order.fecha_entregado %> - Demora entrega:
+	  			<%= distance_of_time_in_words(order.fecha_autorizado, order.fecha_entregado) %> - Tiempo total: 
+	  			<%= distance_of_time_in_words(order.created_at, order.fecha_entregado) %><br>
+	  		<% end %>
+	  	</div>
 	  </div>
 	  <div class="col-xs-3">
 	  	<span class="badge">$ <%= order.cantidad * order.product.price %></span>
