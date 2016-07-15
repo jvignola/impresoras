@@ -18,6 +18,27 @@
 	  	<% if order.aclaracion %>
 	  		<p><b>Aclaración: </b><%= order.aclaracion %></p>
 	  	<% end %>
+	  	<% if order.review_comprador %>
+	  		<p><b>Comentario comprador: </b><%= order.review_comprador.comment %></p>
+	  	<% end %>
+		<% if order.review_vendedor %>
+	  		<p><b>Comentario vendedor: </b><%= order.review_vendedor.comment %></p>
+	  	<% end %>
+	  	<% if order.entregado && (!order.review_comprador || !order.review_vendedor )%>
+	  		<% if user_signed_in?%>
+	  		<p><b>Ingrese sus comentarios: </b>
+			<%= simple_form_for (@review) do |f| %>
+				<%= f.error_notification %>
+			<div class="form-inputs">
+			  <%= f.input :comment, label: 'Comentario' %>
+			  <%= f.input :order_id, :as => :hidden, :input_html => { :value => "#{order.id}" } %>
+			</div>
+			<div class="form-actions">
+			  <%= f.button :submit, 'Comentar' %>
+			</div>
+	  		<% end %>
+	  		<%end%>
+	  	<% end %>
 	  	<div class="fechas">
 	  		Pedido creado hace: <%= time_ago_in_words order.created_at %><br>
 	  		<% if order.fecha_autorizado %>
@@ -40,7 +61,7 @@
 	    <% if @estado == "para autorizar por mi"%>
 	    	<%= link_to 'Autorizar', authorize_order_path(:order_id => order.id), :class => "btn btn-default", method: :post %>
 	    <% end %>
-	    <% if user_signed_in? && current_user.is_admin_user? %>
+	    <% if user_signed_in? && current_user.is_admin_user? &&  order.entregado==false	%>
             <%= link_to 'Entregado', deliver_order_path(:order_id => order.id), :class => "btn btn-default", method: :post %>
         <% end %>
 	  </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713190131) do
+ActiveRecord::Schema.define(version: 20160715165218) do
 
   create_table "interactions", force: :cascade do |t|
     t.integer  "user_id"
@@ -34,11 +34,13 @@ ActiveRecord::Schema.define(version: 20160713190131) do
     t.boolean  "autorizado"
     t.boolean  "entregado"
     t.integer  "cantidad"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.datetime "fecha_autorizado"
     t.datetime "fecha_entregado"
     t.string   "aclaracion"
+    t.integer  "review_comprador_id"
+    t.integer  "review_vendedor_id"
   end
 
   add_index "orders", ["product_id"], name: "index_orders_on_product_id"
@@ -56,6 +58,16 @@ ActiveRecord::Schema.define(version: 20160713190131) do
     t.datetime "image_updated_at"
     t.boolean  "agotado",            default: false
   end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "comment"
+    t.integer  "rating"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reviews", ["order_id"], name: "index_reviews_on_order_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -69,7 +69,15 @@ class OrdersController < ApplicationController
   end
 
   def ordenes_entregadas
-    @orders = Order.entregadas.paginate(page: params[:page], per_page:10)
+    #@orders = Order.sin_comentar.paginate(page: params[:page], per_page:10)
+    @orders = Order.entregadas_sin_comentar.paginate(page: params[:page], per_page:10)
+    @estado = "Entregados"
+    @review = Review.new
+    render 'index'
+  end
+
+  def ordenes_comentadas
+    @orders = Order.entregadas_y_comentadas.paginate(page: params[:page], per_page:10)
     @estado = "Entregados"
     render 'index'
   end
