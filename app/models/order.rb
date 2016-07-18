@@ -20,6 +20,21 @@ class Order < ActiveRecord::Base
     entregadas & sin_comentar_alguno
   end
 
+  def self.mias_entregadas_sin_comentar(id_user)
+    entregadas_mias = Order.entregadas.mias(id_user)
+    sin_comentar_vendedor = Order.where(review_vendedor_id:nil)
+    sin_comentar_comprador = Order.where(review_comprador_id:nil)
+    sin_comentar_alguno = sin_comentar_comprador | sin_comentar_vendedor
+    entregadas_mias & sin_comentar_alguno
+  end
+
+  def self.mias_entregadas_comentadas(id_user)
+    mias_entregadas = Order.entregadas.mias(id_user)
+    comentadas_vendedor = Order.where.not(review_vendedor_id:nil)
+    comentadas_comprador = Order.where.not(review_comprador_id:nil)
+    mias_entregadas & comentadas_comprador & comentadas_vendedor
+  end 
+
   def self.entregadas_y_comentadas
     entregadas = Order.entregadas
     comentadas_vendedor = Order.where.not(review_vendedor_id:nil)

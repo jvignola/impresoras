@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'orders/sin_entregar' => 'orders#ordenes_autorizadas_sin_entregar', as: :ordenes_sin_entregar
   get 'orders/entregadas' => 'orders#ordenes_entregadas', as: :ordenes_entregadas
   get 'orders/comentadas' => 'orders#ordenes_comentadas', as: :ordenes_comentadas
+  get 'orders/mias_comentadas' => 'orders#ordenes_mias_comentadas', as: :ordenes_mias_comentadas
   
   resources :orders
   

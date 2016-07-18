@@ -35,9 +35,10 @@ class ReviewsController < ApplicationController
         if user_signed_in?
           if current_user.is_admin_user?
             @order.update(review_vendedor: @review)
-            format.html { redirect_to ordenes_entregadas_path, notice: 'Se crearon correctamente sus comentarios' }
+            format.html { redirect_to ordenes_entregadas_path, notice: 'Se crearon correctamente sus comentarios'}
           else
             @order.update(review_comprador: @review)
+            format.html { redirect_to ordenes_mias_entregadas_path, notice: 'Se crearon correctamente sus comentarios'}
           end
         end
         format.html { redirect_to @review, notice: 'Se crearon correctamente sus comentarios' }

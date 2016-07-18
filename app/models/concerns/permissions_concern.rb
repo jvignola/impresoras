@@ -9,6 +9,10 @@ module PermissionsConcern
 		self.permission_level == 200
 	end
 
+	def is_client?
+		(self.permission_level == 100 || self.permission_level == 200)
+	end
+
 	def is_admin_user?
 		self.permission_level ==300
 	end

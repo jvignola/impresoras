@@ -57,7 +57,16 @@ class OrdersController < ApplicationController
   end
 
   def ordenes_mias_entregadas
-    @orders = Order.mias(current_user.id).entregadas.paginate(page: params[:page], per_page:10)
+    #@orders = Order.mias(current_user.id).entregadas.paginate(page: params[:page], per_page:10)
+    @orders = Order.mias_entregadas_sin_comentar(current_user.id).paginate(page: params[:page], per_page:10)
+    @estado = "Entregados"
+    @review = Review.new
+    render 'index'
+  end
+
+  def ordenes_mias_comentadas
+    #@orders = Order.mias(current_user.id).entregadas.paginate(page: params[:page], per_page:10)
+    @orders = Order.mias_entregadas_comentadas(current_user.id).paginate(page: params[:page], per_page:10)
     @estado = "Entregados"
     render 'index'
   end
