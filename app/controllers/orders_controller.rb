@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
     render 'index'
   end
 
-  def ordenes_sin_autorizar
+  def ordenes_mias_sin_autorizar
     @orders = Order.mias(current_user.id).sin_autorizar.paginate(page: params[:page], per_page:10)
     @estado = "sin Autorizar"
     render 'index'

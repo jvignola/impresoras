@@ -28,12 +28,13 @@
 			  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <% if user_signed_in? && current_user.is_authorized_user? %>
-                    <li><%= link_to "Pedidos a Autorizar por mi", mis_ordenes_para_autorizar_path() %></li>
+                    <li><%= link_to "Esperando mi autorización", mis_ordenes_para_autorizar_path() %></li>
+                <% else %>
+                    <li><%= link_to "Sin Autorizar", ordenes_mias_sin_autorizar_path %></li>
                 <% end %>
-			    <li><%= link_to "Mios Sin Autorizar", ordenes_sin_autorizar_path %></li>
-			    <li><%= link_to "Mios Autorizados sin entregar", ordenes_mias_sin_entregar_path %></li>
-			    <li><%= link_to "Mios Entregados sin comentar", ordenes_mias_entregadas_path %></li>
-                <li><%= link_to "Mios Comentados", ordenes_mias_comentadas_path %></li>
+			    <li><%= link_to "Autorizados sin entregar", ordenes_mias_sin_entregar_path %></li>
+			    <li><%= link_to "Entregados sin comentar", ordenes_mias_entregadas_path %></li>
+                <li><%= link_to "Comentados", ordenes_mias_comentadas_path %></li>
 			  </ul>
 			</div>
     	</div>
@@ -61,7 +62,7 @@
 			  </button>
 			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><%= link_to "Sin autorizar", ordenes_sin_autorizar_todas_path %></li>
-			    <li><%= link_to "Sin entregar", ordenes_sin_entregar_path %></li>
+			    <li><%= link_to "Autorizados sin entregar", ordenes_sin_entregar_path %></li>
 			    <li><%= link_to "Entregados sin comentar", ordenes_entregadas_path %></li>
                 <li><%= link_to "Comentados", ordenes_comentadas_path %></li>
 			  </ul>
