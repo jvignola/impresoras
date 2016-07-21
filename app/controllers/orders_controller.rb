@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
   def ordenes_mias_entregadas
     #@orders = Order.mias(current_user.id).entregadas.paginate(page: params[:page], per_page:10)
     @orders = Order.mias_entregadas_sin_comentar(current_user.id).paginate(page: params[:page], per_page:10)
-    @estado = "Entregados"
+    @estado = "Entregados sin Comentar"
     @review = Review.new
     render 'index'
   end
@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
   def ordenes_mias_comentadas
     #@orders = Order.mias(current_user.id).entregadas.paginate(page: params[:page], per_page:10)
     @orders = Order.mias_entregadas_comentadas(current_user.id).paginate(page: params[:page], per_page:10)
-    @estado = "Entregados"
+    @estado = "Entregados y Comentados"
     render 'index'
   end
 
@@ -80,14 +80,14 @@ class OrdersController < ApplicationController
   def ordenes_entregadas
     #@orders = Order.sin_comentar.paginate(page: params[:page], per_page:10)
     @orders = Order.entregadas_sin_comentar.paginate(page: params[:page], per_page:10)
-    @estado = "Entregados"
+    @estado = "Entregados sin Comentar"
     @review = Review.new
     render 'index'
   end
 
   def ordenes_comentadas
     @orders = Order.entregadas_y_comentadas.paginate(page: params[:page], per_page:10)
-    @estado = "Entregados"
+    @estado = "Entregados y Comentados"
     render 'index'
   end
 
