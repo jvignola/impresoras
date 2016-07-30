@@ -19,8 +19,7 @@ class OrdersMailer < ApplicationMailer
   end
 
   def pedido_entregado(pedido)
-    # envia mail a los administradores del sitio, informando que ingresó un nuevo pedido 
-    # autorizado o se autorizó un pedido normal
+    # envia mail a la persona que hizo un pedido avisando que fue entregado
     @pedido = pedido
     mail(to: pedido.user.email, subject:'Pedido Entregado')
   end
