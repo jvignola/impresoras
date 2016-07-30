@@ -66,6 +66,6 @@ before_filter :configure_permitted_parameters
   # end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up).push(:name, :permission_level, :user_id)
+    devise_parameter_sanitizer.for(:sign_up).push(:name, :permission_level, :user_id, :age)
   end
 end

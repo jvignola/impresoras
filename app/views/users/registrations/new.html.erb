@@ -6,7 +6,10 @@
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>
     <%= f.input :name, required: true %>
-    <%= f.input :permission_level, required: true %>
+    <% if FALSE %>
+      <%= f.input :permission_level, required: true %>
+    <% end %>
+    <%= f.input :permission_level, collection: [['Normal', 100],['Autorizador', 200], ['Administrador', 300]], :include_blank => false %>
     <%= f.association :user, label_method: :name, value_method: :id, include_blank: true %>
     <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
     <%= f.input :password_confirmation, required: true %>
